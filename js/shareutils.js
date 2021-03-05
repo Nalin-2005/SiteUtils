@@ -120,7 +120,7 @@ function genWhatsapp() {
     elem.style.backgroundColor = "#1ebea5"
     elem.innerHTML = svgs["whatsapp"] + genTooltip("Share using WhatsApp!")
     elem.onclick = function() {
-        var url = "http://api.whatsapp.com/send?text=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\" here:" + document.location.href)
+        var url = "http://api.whatsapp.com/send?text=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\" here: " + document.location.href)
         var temp = document.createElement("a")
         temp.href = url
         temp.target = "_blank"
@@ -135,7 +135,7 @@ function genPinterest() {
     elem.innerHTML = svgs["pinterest"] + genTooltip("Pin it!")
     elem.onclick = function() {
         var url = "http://pinterest.com/pin/create/link/?url=" + encodeURIComponent(document.location.href) +
-            "&description=" + encodeURIComponent("Check out Nalin Angrish's Blog post on " + document.title)
+            "&description=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\"")
         var temp = document.createElement("a")
         temp.href = url
         temp.target = "_blank"
@@ -149,11 +149,8 @@ function genTwitter() {
     elem.style.backgroundColor = "#00a2f3"
     elem.innerHTML = svgs["twitter"] + genTooltip("Tweet it!")
     elem.onclick = function() {
-
-        // &text=Nalin%20Angrish%27s%20Tech%20Blog%3A%20Welcome!
-        //var url = "http://api.whatsapp.com/send?text=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\" here:" + document.location.href)
         var url = "http://twitter.com/intent/tweet?url=" + encodeURIComponent(document.location.href) +
-            "&text=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title)
+            "&text=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\"")
         var temp = document.createElement("a")
         temp.href = url
         temp.target = "_blank"
