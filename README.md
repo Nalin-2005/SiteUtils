@@ -1,2 +1,2 @@
 # BlogUtils
-A utility repository for my blog (blog.nalinangrish.me)
+A utility repository for my website (www.nalinangrish.me)
