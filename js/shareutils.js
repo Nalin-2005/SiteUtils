@@ -77,27 +77,31 @@ var Pinterest = genPinterest()
 var Twitter = genTwitter()
 var Copy = genCopyElem()
 
-window.fetch(document.location.href).then(function(response) {
-    if (document.location.pathname != "/" && response.ok) {
-        var style = document.createElement("style")
-        style.innerText = stylesheet
-        document.head.appendChild(style)
+window.fetch("https://blog.nalinangrish.me/sitemap.xml").then(function(response) {
+    response.text().then(function(content) {
+        if (content.toLowerCase().includes(document.location.href)) {
+            if (document.location.pathname != "/" && response.ok) {
+                var style = document.createElement("style")
+                style.innerText = stylesheet
+                document.head.appendChild(style)
 
 
-        var main = document.querySelector("div.all-container")
-        var shareElem = document.createElement("div");
-        shareElem.className = "shareElem"
-        main.appendChild(shareElem);
+                var main = document.querySelector("div.all-container")
+                var shareElem = document.createElement("div");
+                shareElem.className = "shareElem"
+                main.appendChild(shareElem);
 
-        shareElem.appendChild(Facebook)
-        shareElem.appendChild(WhatsApp)
-        shareElem.appendChild(Pinterest)
-        shareElem.appendChild(Twitter)
-        shareElem.appendChild(Copy)
+                shareElem.appendChild(Facebook)
+                shareElem.appendChild(WhatsApp)
+                shareElem.appendChild(Pinterest)
+                shareElem.appendChild(Twitter)
+                shareElem.appendChild(Copy)
 
 
-        document.querySelector("#footer").innerHTML += "<br><br><br>"
-    }
+                document.querySelector("#footer").innerHTML += "<br><br><br>"
+            }
+        }
+    })
 })
 
 
