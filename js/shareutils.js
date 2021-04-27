@@ -52,6 +52,9 @@ const stylesheet = `
 	  align-items: center;
   }
 
+  body{
+      padding-bottom: 50px;
+  }
   path.share{
 	  fill: white;
   }
@@ -71,38 +74,39 @@ const stylesheet = `
 	  border: none;
   }
 `;
-var Facebook = genFacebook()
-var WhatsApp = genWhatsapp()
-var Pinterest = genPinterest()
-var Twitter = genTwitter()
-var Copy = genCopyElem()
-
-window.fetch("https://blog.nalinangrish.me/sitemap.xml").then(function(response) {
-    response.text().then(function(content) {
-        if (content.toLowerCase().includes(document.location.href)) {
-            if (document.location.pathname != "/" && response.ok) {
-                var style = document.createElement("style")
-                style.innerText = stylesheet
-                document.head.appendChild(style)
 
 
-                var main = document.querySelector("div.all-container")
-                var shareElem = document.createElement("div");
-                shareElem.className = "shareElem"
-                main.appendChild(shareElem);
+function create_share_buttons(sitemap_url, message) {
+    var Facebook = genFacebook()
+    var WhatsApp = genWhatsapp(message)
+    var Pinterest = genPinterest(message)
+    var Twitter = genTwitter(message)
+    var Copy = genCopyElem()
 
-                shareElem.appendChild(Facebook)
-                shareElem.appendChild(WhatsApp)
-                shareElem.appendChild(Pinterest)
-                shareElem.appendChild(Twitter)
-                shareElem.appendChild(Copy)
+    window.fetch(sitemap_url).then(function(response) {
+        response.text().then(function(content) {
+            if (content.toLowerCase().includes(document.location.href)) {
+                if (document.location.pathname != "/" && response.ok) {
+                    var style = document.createElement("style")
+                    style.innerText = stylesheet
+                    document.head.appendChild(style)
 
 
-                document.querySelector("#footer").innerHTML += "<br><br><br>"
+                    var main = document.querySelector("div.all-container")
+                    var shareElem = document.createElement("div");
+                    shareElem.className = "shareElem"
+                    main.appendChild(shareElem);
+
+                    shareElem.appendChild(Facebook)
+                    shareElem.appendChild(WhatsApp)
+                    shareElem.appendChild(Pinterest)
+                    shareElem.appendChild(Twitter)
+                    shareElem.appendChild(Copy)
+                }
             }
-        }
+        })
     })
-})
+}
 
 
 function genFacebook() {
@@ -119,12 +123,12 @@ function genFacebook() {
     return elem;
 }
 
-function genWhatsapp() {
+function genWhatsapp(message) {
     var elem = genBase();
     elem.style.backgroundColor = "#1ebea5"
     elem.innerHTML = svgs["whatsapp"] + genTooltip("Share using WhatsApp!")
     elem.onclick = function() {
-        var url = "http://api.whatsapp.com/send?text=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\" here: " + document.location.href)
+        var url = "http://api.whatsapp.com/send?text=" + message + "\n " + document.location.href
         var temp = document.createElement("a")
         temp.href = url
         temp.target = "_blank"
@@ -133,13 +137,13 @@ function genWhatsapp() {
     return elem;
 }
 
-function genPinterest() {
+function genPinterest(message) {
     var elem = genBase();
     elem.style.backgroundColor = "#e60023"
     elem.innerHTML = svgs["pinterest"] + genTooltip("Pin it!")
     elem.onclick = function() {
         var url = "http://pinterest.com/pin/create/link/?url=" + encodeURIComponent(document.location.href) +
-            "&description=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\"")
+            "&description=" + message
         var temp = document.createElement("a")
         temp.href = url
         temp.target = "_blank"
@@ -148,13 +152,13 @@ function genPinterest() {
     return elem;
 }
 
-function genTwitter() {
+function genTwitter(message) {
     var elem = genBase();
     elem.style.backgroundColor = "#00a2f3"
     elem.innerHTML = svgs["twitter"] + genTooltip("Tweet it!")
     elem.onclick = function() {
         var url = "http://twitter.com/intent/tweet?url=" + encodeURIComponent(document.location.href) +
-            "&text=" + encodeURIComponent("Check out Nalin Angrish's Blog post on \"" + document.title + "\"")
+            "&text=" + message
         var temp = document.createElement("a")
         temp.href = url
         temp.target = "_blank"
