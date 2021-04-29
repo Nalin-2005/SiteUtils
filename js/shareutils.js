@@ -1,5 +1,9 @@
 // shareutils.js
 
+
+/**
+ * An object that contains the svg data for the various logos of the social platforms.
+ */
 const svgs = {
     "twitter": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="share" d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>',
     "facebook": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="share" d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>',
@@ -9,93 +13,40 @@ const svgs = {
 }
 
 
-const stylesheet = `
-.tooltip {
-	position: relative;
-	display: inline-block;
-	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-  }
-  
-  /* Tooltip text */
-  .tooltip .tooltiptext {
-	visibility: hidden;
-	width: 120px;
-	background-color: black;
-	color: #fff;
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 6px;
-   
-	/* Position the tooltip text - see examples below! */
-	position: absolute;
-	z-index: 1;
-
-	bottom: 100%;
-	left: 50%;
-	margin-left: -60px;
-  }
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .tooltip:hover .tooltiptext {
-	visibility: visible;
-  }
-
-
-  .shareElem{
-	  height: 50px;
-	  position: fixed;
-	  bottom: 0px;
-	  width: 100%;
-	  color: white;
-	  text-align: center;
-	  display: flex;
-	  align-items: center;
-  }
-
-  body{
-      padding-bottom: 50px;
-  }
-  path.share{
-	  fill: white;
-  }
-
-
-  .shareButton{
-	  height: 100%;
-	  width: 20%;
-	  text-align: center;
-	  vertical-align: middle;
-	  border-top-left-radius: 7px ;
-	  border-top-right-radius: 7px ;
-	  border: none;
-  }
-  
-  .shareButton:active{
-	  border: none;
-  }
-`;
-
-
+/**
+ * The main function of the script to create buttons for sharing the current webpage's URL o someone using a social media platform. 
+ * @param {string} sitemap_url The URL of the sitemap of the current site. This is used to prevent the buttons from appearing on pages which were not found and raised 404 errors. 
+ * @param {string} message A message that needs to be included while posting it to a platform. If you do not want to include any custom message, you should enter an empty string.
+ */
 function create_share_buttons(sitemap_url, message) {
     message = encodeURIComponent(message);
+    /** The button for sharing the URL on Facebook. */
     var Facebook = genFacebook();
+    /** The button for sharing the URL on Whatsapp. */
     var WhatsApp = genWhatsapp(message);
+    /** The button for sharing the URL on Pinterest. */
     var Pinterest = genPinterest(message);
+    /** The button for sharing the URL on Twitterp. */
     var Twitter = genTwitter(message);
+    /** The button for copying the URL. */
     var Copy = genCopyElem();
 
     window.fetch(sitemap_url).then(function(response) {
         response.text().then(function(content) {
             if (content.toLowerCase().includes(document.location.href)) {
                 if (document.location.pathname != "/" && response.ok) {
-                    var style = document.createElement("style");
-                    style.innerText = stylesheet;
-                    document.head.appendChild(style);
+                    /** An element to link to the stylesheet for the buttons. */
+                    var style = document.createElement("link");
+                    style.href = "https://cdn.nalinangrish.me/css/shareutils.css";
+                    style.rel = "stylesheet";
 
 
-                    var main = document.querySelector("div.all-container");
+                    /** The element in which to place the share button bar */
+                    var main = document.querySelector("body");
+                    /** The element which contains the share buttons */
                     var shareElem = document.createElement("div");
                     shareElem.className = "shareElem";
+                    main.appendChild(style);
                     main.appendChild(shareElem);
 
                     shareElem.appendChild(Facebook);
@@ -105,11 +56,15 @@ function create_share_buttons(sitemap_url, message) {
                     shareElem.appendChild(Copy);
                 }
             }
-        })
-    })
+        });
+    });
 }
 
 
+/**
+ * A function to create the share button for Facebook.
+ * @returns {HTMLButtonElement} A styled button which works as a link.
+ */
 function genFacebook() {
     var elem = genBase();
     elem.style.backgroundColor = "#4267b2";
@@ -124,6 +79,11 @@ function genFacebook() {
     return elem;
 }
 
+/**
+ * A function to create the share button for WhatsApp.
+ * @param {str} message A message that needs to be included while posting it to WhatsApp.
+ * @returns {HTMLButtonElement} A styled button which works as a link.
+ */
 function genWhatsapp(message) {
     var elem = genBase();
     elem.style.backgroundColor = "#1ebea5";
@@ -138,6 +98,12 @@ function genWhatsapp(message) {
     return elem;
 }
 
+
+/**
+ * A function to create the pin button for Pinterest.
+ * @param {str} message A message that needs to be included while posting it to Pinterest.
+ * @returns {HTMLButtonElement} A styled button which works as a link.
+ */
 function genPinterest(message) {
     var elem = genBase();
     elem.style.backgroundColor = "#e60023";
@@ -153,6 +119,12 @@ function genPinterest(message) {
     return elem;
 }
 
+
+/**
+ * A function to create the tweet button for Twitter.
+ * @param {str} message A message that needs to be included while posting it to Twitter.
+ * @returns {HTMLButtonElement} A styled button which works as a link.
+ */
 function genTwitter(message) {
     var elem = genBase();
     elem.style.backgroundColor = "#00a2f3";
@@ -168,6 +140,11 @@ function genTwitter(message) {
     return elem;
 }
 
+
+/**
+ * A function to create the copy button.
+ * @returns {HTMLButtonElement} A styled button.
+ */
 function genCopyElem() {
     var elem = genBase();
     elem.style.backgroundColor = "#808080";
@@ -188,12 +165,22 @@ function genCopyElem() {
 
 
 
+/**
+ * A function to generate a basic button that can be used in the button bar.
+ * @returns {HTMLButtonElement} the base button for every platform.
+ */
 function genBase() {
     var elem = document.createElement("button");
     elem.className = "tooltip shareButton";
     return elem;
 }
 
+
+/**
+ * A function to generate a tooltip for the buttons.
+ * @param {string} text the message to show on the tooltip.
+ * @returns {string} the HTML code of the tooltip.
+ */
 function genTooltip(text) {
     return "<span class='tooltiptext'>" + text + "</span>";
 }
