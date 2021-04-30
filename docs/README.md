@@ -1,16 +1,10 @@
-# SiteUtils
-A CDN repository for my website (www.nalinangrish.me)  
-Although this repo was initially made to support only my website, i have updated it and ca now be used by anyone in their own websites.  
-## Folder structure
-- `js` - This folder contains all the JavaScript helper files.
-- `css` - This folder contains all the CSS helper files.   
-	For getting the usage examples of each and every file under these directories, visit the `README.md`s present in these folders.
-- `docs` - This folder contains the JSDoc output for documenting the JavaScript code. 
-- `package-lock.json` - This file contains the dependencies required to generate the documentation for the repo.
-- `gendocs.js` - A script to generate the documentation for all the code using `jsdoc2md`. Run `npm install` in this directory before executing this script.
-## License
-This project is available under the terms of the MIT License.
+# Nalin's SiteUtils JavaScript source Documentation.   
+
+### [shareutils.js](shareutils.js.md)  
+### [time-to-read.js](time-to-read.js.md)  
+# License:  
 ```
+
 MIT License
 
 Copyright (c) 2021 Nalin Angrish

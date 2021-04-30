@@ -20,30 +20,22 @@ const svgs = {
  */
 function create_share_buttons(sitemap_url, message) {
     message = encodeURIComponent(message);
-    /** The button for sharing the URL on Facebook. */
     var Facebook = genFacebook();
-    /** The button for sharing the URL on Whatsapp. */
     var WhatsApp = genWhatsapp(message);
-    /** The button for sharing the URL on Pinterest. */
     var Pinterest = genPinterest(message);
-    /** The button for sharing the URL on Twitterp. */
     var Twitter = genTwitter(message);
-    /** The button for copying the URL. */
     var Copy = genCopyElem();
 
     window.fetch(sitemap_url).then(function(response) {
         response.text().then(function(content) {
             if (content.toLowerCase().includes(document.location.href)) {
                 if (document.location.pathname != "/" && response.ok) {
-                    /** An element to link to the stylesheet for the buttons. */
                     var style = document.createElement("link");
                     style.href = "https://cdn.nalinangrish.me/css/shareutils.css";
                     style.rel = "stylesheet";
 
 
-                    /** The element in which to place the share button bar */
                     var main = document.querySelector("body");
-                    /** The element which contains the share buttons */
                     var shareElem = document.createElement("div");
                     shareElem.className = "shareElem";
                     main.appendChild(style);
@@ -81,7 +73,7 @@ function genFacebook() {
 
 /**
  * A function to create the share button for WhatsApp.
- * @param {str} message A message that needs to be included while posting it to WhatsApp.
+ * @param {string} message A message that needs to be included while posting it to WhatsApp.
  * @returns {HTMLButtonElement} A styled button which works as a link.
  */
 function genWhatsapp(message) {
@@ -101,7 +93,7 @@ function genWhatsapp(message) {
 
 /**
  * A function to create the pin button for Pinterest.
- * @param {str} message A message that needs to be included while posting it to Pinterest.
+ * @param {string} message A message that needs to be included while posting it to Pinterest.
  * @returns {HTMLButtonElement} A styled button which works as a link.
  */
 function genPinterest(message) {
@@ -122,7 +114,7 @@ function genPinterest(message) {
 
 /**
  * A function to create the tweet button for Twitter.
- * @param {str} message A message that needs to be included while posting it to Twitter.
+ * @param {string} message A message that needs to be included while posting it to Twitter.
  * @returns {HTMLButtonElement} A styled button which works as a link.
  */
 function genTwitter(message) {
