@@ -1,0 +1,30 @@
+{
+    "name": "siteutils",
+    "version": "1.0.0",
+    "description": "A CDN repository for my website (www.nalinangrish.me)",
+    "main": "gendocs.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "doc": "node gendocs.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Nalin-2005/SiteUtils.git"
+    },
+    "keywords": [
+        "cdn",
+        "javascript",
+        "css"
+    ],
+    "author": "Nalin Angrish <nalin@nalinangrish.me> (www.nalinangrish.me)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Nalin-2005/SiteUtils/issues"
+    },
+    "homepage": "https://github.com/Nalin-2005/SiteUtils#readme",
+    "dependencies": {
+        "jsdoc-to-markdown": "^7.0.1"
+    }
+}

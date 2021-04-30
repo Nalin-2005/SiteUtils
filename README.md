@@ -8,6 +8,11 @@ Although this repo was initially made to support only my website, i have updated
 - `docs` - This folder contains the JSDoc output for documenting the JavaScript code. 
 - `package-lock.json` - This file contains the dependencies required to generate the documentation for the repo.
 - `gendocs.js` - A script to generate the documentation for all the code using `jsdoc2md`. Run `npm install` in this directory before executing this script.
+## Contributing
+You can freely contribute to this repo by adding your own files, documenting, and uploading them. You need to document the project using JSDoc comments and then, you have to generate the documentation using the tools provided in this repo. You can generate the documentation by following the below steps:  
+- Make sure you have node installed. If not, install it from nodejs.org. Also make sure that it is added to the PATH environment variable and you can successfully run `node --version` inside the current terminal.  
+- Run `npm install` in the root directory of this repo.  
+- Run `npm run doc` and wait till it generates the Documentation.  
 ## License
 This project is available under the terms of the MIT License.
 ```
