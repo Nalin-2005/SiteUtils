@@ -1,6 +1,6 @@
 # SiteUtils
 A CDN repository for my website (www.nalinangrish.me)  
-Although this repo was initially made to support only my website, i have updated it and ca now be used by anyone in their own websites.  
+Although this repo was initially made to support only my website, i have updated it and can now be used by anyone in their own websites.  
 ## Folder structure
 - `js` - This folder contains all the JavaScript helper files.
 - `css` - This folder contains all the CSS helper files.   

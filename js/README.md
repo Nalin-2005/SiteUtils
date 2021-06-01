@@ -1,4 +1,30 @@
 # JavaScript
+## contact_api.js
+**Purpose**: Create a simple contact form without building a backend for it.   
+**Including**: ```<script src="https://cdn.nalinangrish.me/js/contact_api.js"></script>```   
+**Using**: 
+1. Create a form in your HTML and ensure that it contains three inputs with the names `name`, `email` and `message` respectively.
+2. Fork [this](http://github.com/Nalin-2005/NAPI) repository and edit the `data/contact_api.json` file by adding a JSON element with the key as a unique name related to your project, and the value as an email address to which you want to receive the form responses.
+3. After you have added the contact data, submit a pull request.
+4. Create another script element and add a function inside it as:
+```javascript
+function submitForm(){
+	// Show a loader
+	contact_form_send("<appid>", "<form_selector>").then((resp)=>{
+		// Hide the loader and do something with the response.
+	}).catch((error)=>{
+		// Hide the loader and do something with the error.
+	})
+}
+```
+Here, replace `<appid>` with the key of the element you added to `data/contact_api.json`, and `<form_selector>` with a selector of your form. Note that both of these should be string values.    
+5. Create a button in your form and set its `onclick` attribute to trigger the `submitForm` function.     
+**Documentation**: https://cdn.nalinangrish.me/docs/contact_api.js.html   
+
+
+
+
+
 ## shareutils.js
 **Purpose**: Create buttons at the bottom for sharing the current URL (intended to be used for a blog post) with a message onto a social media platform.   
 **Including**: ```<script src="https://cdn.nalinangrish.me/js/shareutils.js"></script>```   
